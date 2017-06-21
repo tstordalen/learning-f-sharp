@@ -1,0 +1,56 @@
+
+
+2 Values, operators, expressions, functions 
+- operators are functions
+- monadic operator has only one operand
+- dyadic operator has two operands
+- the uint type, weird stuff.
+    only one value, written ().
+    Used as "dummy" result in imperative part of f#
+    of a computation that consists of only side effects. 
+
+Closure:
+    describes how a function is a value in f#. 
+    A triple containing the:
+        1: parameter/argument identifier (NOTE: singular. All functions in f# have one arugment only)
+        2: the expression to be evaluated
+        3: the environment at the time that the function was defined.
+
+Explanation of wtf it is:
+We want functions to have the property that given the same parameter, they always return the same value (wouldn't be a function if not). 
+However, sometimes the function will defined in terms of something that might seemingly change at a later statae. 
+For example, the following function is a legal function in F#. 
+
+let two = 2;
+let multiplyByTwo n = 
+    let result = n * two;
+    let two = 3;
+    result;
+
+Even though the definition of 'two' changes after 'result' has been calculated, the function still works properly (that is, multiplies n by 2). 
+This is because the environment at the time of the definition of the function is copied and stored in the closure (nr. 3 in the list above). The function will
+use the environment stored in the closure to evaluate, so that it always return the same result. Beautiful!  
+
+Also, this is used for some other stuff as well: 
+(got this from stack overflow: https://stackoverflow.com/questions/20324625/what-is-the-difference-between-mutable-values-and-immutable-value-redefinition)
+let TestShadowing2() =
+   let a = 1
+   printfn "a: %i" a
+   if true then
+      let a = 2
+      printfn "a: %i" a
+   printfn "a: %i" a
+
+> TestShadowing2();;
+a: 1
+a: 2
+a: 1
+
+As we can see, the definition of a such that a=2 is only valid in the scope of the clause under 'if true then'.... 
+After this scope is exited, a is once again defined such that a=1. 
+
+The book talks about programs as closures, makes sense. The program in itself is a function, and it is given som start values (environment), and some 
+arguments (command line arguments). 
+
+
+Ordering and equality are automatically extended by F#!! What?! (functions are not included in either, though)
