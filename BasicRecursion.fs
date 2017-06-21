@@ -22,3 +22,35 @@ let rec factAlt n =
 
 printfn "The factorial of 5 is %i" (factAlt 5);
 
+
+// x^n can be expressed recursively as x * x ^ (n-1)
+let rec recursivePower x n = 
+    match n with
+    | 0 -> 1
+    | y -> x * recursivePower x (n-1);
+
+printfn "2 to the power of 3 is %i" (recursivePower 2 3);
+
+//The above problem can also be solved using a tuple 
+//The below can represent 2^3 
+let twoPowThree = (2,3);
+
+//Crash course on accessing tuple values, commence! 
+//The below works for tuples of length two only
+printfn "The base is %i and the exponent is %i" (fst twoPowThree) (snd twoPowThree);
+
+//If they're longer, you have to unpack them
+let first, second = twoPowThree;
+printfn "The base is %i and the exponent is %i" (first) (second);
+
+//Note that in the below, we do exhaustive pattern matching even 
+// though we never mention x! Also note that power (5, -1) results in infinite recursion.
+let rec power = function
+    | (x, 0) -> 1                       
+    | (x, n) -> x * power(x, n-1);  
+
+printfn "2 to the power of 3 is %i" (power (2,3) );
+
+//Order matters for the patterns. If the two clauses in the power function are reversed,
+//it would yield an infinite recursion for all inputs. This is because (x, n) matches anything, 
+//and the (x, 0) clause is never reached.
