@@ -40,6 +40,3 @@ Thumbs.db
 ####################
 .vscode/
 
-#Ignore "local" files#
-######################
-local/

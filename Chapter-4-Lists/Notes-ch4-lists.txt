@@ -1,0 +1,37 @@
+Equality of lists: Two lists are equal if the are of the same length, and for each position in one list,
+the element on the same position in the other list is equal to the first. The equals operator ( = ) can be used 
+to determine equality of lists so long as the lists are of the same type, and the equality operator is defined for the type of 
+the elements of the list. 
+
+Ordering of lists: lexicographically, given that ordering is provided for the elements of the list. The empty list [] is smaller 
+than all other lists (except the empty list, of course). 
+['b', 'o' 'o', 'k'] < ['b', 'o' 'o', 'k', 's'] is true, and 
+['b','a','r','t','e','n','d','e','r'] < ['b', 'o' 'o', 'k'] is also true
+
+The cons operator
+Infix :: (called "cons"). i :: list1 builds a NEW list from integer i and existing list list1 by adding i to the beginning of list1. 
+Associates to the right, so 1::2::3::[] first creates list [3], then [2; 3], then [1; 2; 3];
+NOTE: :: has O(1) time complexity due to lists being implemented as singly linked lists.
+
+List patterns:
+Cons is also used to pattern match lists.  x::xs matches such that the head of the list is bound to x, while the tail is 
+bound to xs. x::[] matches a list of one element only, and binds the one element to 'x'.
+[x1; x2; x3] matches a list of three elements.
+
+Generating lists:
+[1 .. 10] generates a list of integers from 1 to 10, both inclusive.
+[10 .. 10] generates the empty list.
+[1 .. 2 .. 10] generates a list of integers, between 1 and 10, both inclusive, that can be reached by making steps of size 2, starting from one. 
+So in this case, [1; 3; 5; 7; 9].
+[10 .. -2 .. 1] generates a list of integers between 1 and 10, both inclusive, that can be reached by making steps of size -2, starting from 10.
+So, in this case, [10; 8; 6; 4; 2];
+Also works for floats. 
+[1.1 .. 2.2 .. 10.0], etc. 
+
+In general [b .. s .. e], where b is beginning, e is end and s is step. Each of them can be an arbitrary mathematical expression. 
+In [ b .. e], s defaults to 1 or 1.0. 
+
+
+
+
+
